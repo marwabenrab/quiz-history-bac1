@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اختبار التاريخ - بكالوريا</title>
+  <style>
+
+    body {
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(to bottom right, #e0f7fa, #e1bee7);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* هذا يخلي كلشي يتوسّط عموديًا */
+  min-height: 100vh;
+}
+
+
+    h1 {
+      color: #4a148c;
+      margin-top: 20px;
+    }
+
+    #quiz-container {
+      background-color: white;
+      padding: 30px;
+      margin: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+      display: none;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .choices button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: #d1c4e9;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .choices button:hover {
+      background-color: #b39ddb;
+    }
+
+    .correct {
+      background-color: #a5d6a7 !important;
+    }
+
+    .incorrect {
+      background-color: #ef9a9a !important;
+    }
+
+    #next-btn {
+      margin-top: 30px;
+      padding: 16px 30px;
+      background-color: #7e57c2;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #timer {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #d32f2f;
+      font-weight: bold;
+    }
+
+   
+    #start-btn {
+  display: block;
+  padding: 16px 30px;
+  background-color: #4a148c;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 20px auto;
+}
+
+
+  </style>
+</head>
+<body>
+  <h1>اختبار التاريخ - بكالوريا</h1>
+
+  <div id="quiz-container">
+    <div id="timer">الوقت: 10</div>
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <button id="next-btn" onclick="nextQuestion()">التالي</button>
+  </div>
+
+  <button id="start-btn" onclick="startQuiz()">ابدأ الاختبار</button>
+
+  <script>
+    const questions = [
+      {
+        question: "ما هي نتائج مؤتمر يالطا 1945؟",
+        choices: ["تقسيم ألمانيا", "إعلان الحرب على اليابان", "تشكيل هيئة الأمم المتحدة", "جميع ما سبق"],
+        correct: 3
+      },
+      {
+        question: "متى أُسست هيئة الأمم المتحدة؟",
+        choices: ["1944", "1945", "1950", "1948"],
+        correct: 1
+      },
+      {
+        question: "ما هي أول منظمة عسكرية ظهرت بعد الحرب العالمية الثانية؟",
+        choices: ["حلف وارسو", "حلف الشمال الأطلسي", "حلف بغداد", "الكومنفورم"],
+        correct: 1
+      },
+      {
+        question: "ما المقصود بالستار الحديدي؟",
+        choices: ["سلاح جديد", "مصطلح أطلقه تشرشل للفصل بين المعسكرين", "حاجز دفاعي", "تكنولوجيا روسية"],
+        correct: 1
+      },
+      {
+        question: "متى بدأت الحرب الباردة؟",
+        choices: ["1945", "1947", "1950", "1955"],
+        correct: 1
+      },
+      {
+        question: "من هو أول رئيس للجزائر بعد الاستقلال؟",
+        choices: ["بن بلة", "بومدين", "زروال", "الشاذلي"],
+        correct: 0
+      },
+      {
+        question: "ما هو تاريخ اندلاع الثورة الجزائرية؟",
+        choices: ["1 نوفمبر 1954", "5 جويلية 1962", "8 ماي 1945", "3 جويلية 1962"],
+        correct: 0
+      },
+      {
+        question: "ما الهدف من إصدار بيان أول نوفمبر؟",
+        choices: ["تعريف الثورة وأهدافها", "إعلان الاستقلال", "دعم فرنسا", "مهاجمة الحزب الشيوعي"],
+        correct: 0
+      },
+      {
+        question: "متى أُسست المنظمة الخاصة؟",
+        choices: ["1947", "1950", "1945", "1952"],
+        correct: 0
+      },
+      {
+        question: "متى تم الاعتراف باستقلال الجزائر دوليا؟",
+        choices: ["3 جويلية 1962", "1 نوفمبر 1954", "5 جويلية 1962", "20 أوت 1955"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let timer;
+    let timeLeft = 10;
+    let answered = false;
+
+    function startQuiz() {
+      document.getElementById("start-btn").style.display = "none";
+      document.getElementById("quiz-container").style.display = "block";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      answered = false;
+      timeLeft = 10;
+      document.getElementById("timer").textContent = `الوقت: ${timeLeft}`;
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = `الوقت: ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          disableChoices();
+        }
+      }, 1000);
+
+      let q = questions[currentQuestion];
+      document.getElementById("question").textContent = q.question;
+      let choicesHtml = "";
+      q.choices.forEach((choice, index) => {
+        choicesHtml += `<button onclick="checkAnswer(${index}, this)">${choice}</button>`;
+      });
+      document.getElementById("choices").innerHTML = choicesHtml;
+    }
+
+    function checkAnswer(index, btn) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timer);
+      const correctIndex = questions[currentQuestion].correct;
+      if (index === correctIndex) {
+        btn.classList.add("correct");
+        score++;
+      } else {
+        btn.classList.add("incorrect");
+        document.querySelectorAll("#choices button")[correctIndex].classList.add("correct");
+      }
+      disableChoices();
+    }
+
+    function disableChoices() {
+      document.querySelectorAll("#choices button").forEach(btn => btn.disabled = true);
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById("quiz-container").innerHTML = `<h2>لقد أكملت الاختبار!</h2><p>عدد الإجابات الصحيحة: ${score} من ${questions.length}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
