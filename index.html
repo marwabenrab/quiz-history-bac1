@@ -1,27 +1,26 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>اختبار التاريخ - بكالوريا</title>
   <style>
-
     body {
-  font-family: 'Cairo', sans-serif;
-  background: linear-gradient(to bottom right, #e0f7fa, #e1bee7);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* هذا يخلي كلشي يتوسّط عموديًا */
-  min-height: 100vh;
-}
-
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #e1bee7);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
     h1 {
       color: #4a148c;
       margin-top: 20px;
+      text-align: center;
     }
 
     #quiz-container {
@@ -30,9 +29,10 @@
       margin: 20px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+      max-width: 700px;
       width: 90%;
       display: none;
+      direction: rtl;
     }
 
     .question {
@@ -84,29 +84,27 @@
       margin-bottom: 15px;
       color: #d32f2f;
       font-weight: bold;
+      text-align: center;
     }
 
-   
     #start-btn {
-  display: block;
-  padding: 16px 30px;
-  background-color: #4a148c;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 20px;
-  cursor: pointer;
-  margin: 20px auto;
-}
-
-
+      display: block;
+      padding: 16px 30px;
+      background-color: #4a148c;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 20px auto;
+    }
   </style>
 </head>
 <body>
-  <h1>اختبار التاريخ - بكالوريا</h1>
+  <h1>اختبار التاريخ - بكالوريا: الحرب الباردة</h1>
 
   <div id="quiz-container">
-    <div id="timer">الوقت: 10</div>
+    <div id="timer">الوقت: 15</div>
     <div class="question" id="question"></div>
     <div class="choices" id="choices"></div>
     <button id="next-btn" onclick="nextQuestion()">التالي</button>
@@ -116,62 +114,42 @@
 
   <script>
     const questions = [
-      {
-        question: "ما هي نتائج مؤتمر يالطا 1945؟",
-        choices: ["تقسيم ألمانيا", "إعلان الحرب على اليابان", "تشكيل هيئة الأمم المتحدة", "جميع ما سبق"],
-        correct: 3
-      },
-      {
-        question: "متى أُسست هيئة الأمم المتحدة؟",
-        choices: ["1944", "1945", "1950", "1948"],
-        correct: 1
-      },
-      {
-        question: "ما هي أول منظمة عسكرية ظهرت بعد الحرب العالمية الثانية؟",
-        choices: ["حلف وارسو", "حلف الشمال الأطلسي", "حلف بغداد", "الكومنفورم"],
-        correct: 1
-      },
-      {
-        question: "ما المقصود بالستار الحديدي؟",
-        choices: ["سلاح جديد", "مصطلح أطلقه تشرشل للفصل بين المعسكرين", "حاجز دفاعي", "تكنولوجيا روسية"],
-        correct: 1
-      },
-      {
-        question: "متى بدأت الحرب الباردة؟",
-        choices: ["1945", "1947", "1950", "1955"],
-        correct: 1
-      },
-      {
-        question: "من هو أول رئيس للجزائر بعد الاستقلال؟",
-        choices: ["بن بلة", "بومدين", "زروال", "الشاذلي"],
-        correct: 0
-      },
-      {
-        question: "ما هو تاريخ اندلاع الثورة الجزائرية؟",
-        choices: ["1 نوفمبر 1954", "5 جويلية 1962", "8 ماي 1945", "3 جويلية 1962"],
-        correct: 0
-      },
-      {
-        question: "ما الهدف من إصدار بيان أول نوفمبر؟",
-        choices: ["تعريف الثورة وأهدافها", "إعلان الاستقلال", "دعم فرنسا", "مهاجمة الحزب الشيوعي"],
-        correct: 0
-      },
-      {
-        question: "متى أُسست المنظمة الخاصة؟",
-        choices: ["1947", "1950", "1945", "1952"],
-        correct: 0
-      },
-      {
-        question: "متى تم الاعتراف باستقلال الجزائر دوليا؟",
-        choices: ["3 جويلية 1962", "1 نوفمبر 1954", "5 جويلية 1962", "20 أوت 1955"],
-        correct: 0
-      }
+      { question: "ما هي نتائج مؤتمر يالطا 1945؟", choices: ["تقسيم ألمانيا", "إعلان الحرب على اليابان", "تشكيل هيئة الأمم المتحدة", "جميع ما سبق"], correct: 3 },
+      { question: "متى أُسست هيئة الأمم المتحدة؟", choices: ["1944", "1945", "1950", "1948"], correct: 1 },
+      { question: "ما هي أول منظمة عسكرية ظهرت بعد الحرب العالمية الثانية؟", choices: ["حلف وارسو", "حلف الشمال الأطلسي", "حلف بغداد", "الكومنفورم"], correct: 1 },
+      { question: "ما المقصود بالستار الحديدي؟", choices: ["سلاح جديد", "مصطلح أطلقه تشرشل للفصل بين المعسكرين", "حاجز دفاعي", "تكنولوجيا روسية"], correct: 1 },
+      { question: "متى بدأت الحرب الباردة؟", choices: ["1945", "1947", "1950", "1955"], correct: 1 },
+      { question: "ما هو سبب اندلاع الحرب الباردة؟", choices: ["التنافس على الموارد", "الخلاف حول ألمانيا", "الاختلاف الإيديولوجي", "الأزمة الاقتصادية"], correct: 2 },
+      { question: "ما هو مبدأ ترومان؟", choices: ["خطة اقتصادية", "دعم الشعوب ضد الشيوعية", "التعاون الأمريكي الروسي", "العزلة"], correct: 1 },
+      { question: "ما هي خطة مارشال؟", choices: ["خطة اقتصادية", "تحالف عسكري", "برنامج نووي", "حرب إعلامية"], correct: 0 },
+      { question: "من الدول المؤسسة للناتو؟", choices: ["أوروبا الشرقية", "الاتحاد السوفياتي", "أوروبا الغربية", "دول عدم الانحياز"], correct: 2 },
+      { question: "ما هو الكومنفورم؟", choices: ["منظمة للدعاية الشيوعية", "تحالف غربي", "منظمة اقتصادية", "برنامج نووي"], correct: 0 },
+      { question: "كيف تم تقسيم ألمانيا؟", choices: ["شرق/غرب", "شمال/جنوب", "3 مناطق", "لم تُقسم"], correct: 0 },
+      { question: "رد السوفيات على خطة مارشال؟", choices: ["شاركوا", "رفضوها وأنشؤوا الكوميكون", "عدّلوها", "قبلوها"], correct: 1 },
+      { question: "ما المقصود بالكوميكون؟", choices: ["منظمة اقتصادية شرقية", "حلف عسكري", "دعاية غربية", "تحالف عدم الانحياز"], correct: 0 },
+      { question: "ما هو الحدث الذي بدأ الحرب الباردة؟", choices: ["قنبلة اليابان", "خطاب الستار الحديدي", "تأسيس الأمم", "مؤتمر بوتسدام"], correct: 1 },
+      { question: "نظام القطبية الثنائية هو:", choices: ["قوة واحدة", "توازن عالمي", "قوتين (أمريكا والاتحاد السوفياتي)", "تحالف دولي"], correct: 2 },
+      { question: "ما هي سياسة الاحتواء؟", choices: ["منع الشيوعية", "إضعاف أمريكا", "تحالف مع السوفيات", "تحرير الدول"], correct: 0 },
+      { question: "متى تأسس حلف وارسو؟", choices: ["1949", "1955", "1950", "1961"], correct: 1 },
+      { question: "من قادة المعسكر الشرقي؟", choices: ["هتلر", "روزفلت", "تشرشل", "ستالين"], correct: 3 },
+      { question: "قادة المعسكر الغربي؟", choices: ["هتلر", "ترومان", "لينين", "كاسترو"], correct: 1 },
+      { question: "ما هدف مؤتمر بوتسدام؟", choices: ["حل أزمة فلسطين", "ترسيم الحدود", "الاستسلام الياباني", "تنظيم العالم بعد الحرب"], correct: 3 },
+      { question: "ما وسيلة الصراع في الحرب الباردة؟", choices: ["معارك مباشرة", "غزو عسكري", "تجسس ودعاية", "تحالفات فقط"], correct: 2 },
+      { question: "معنى التعايش السلمي؟", choices: ["وقف الصراع", "قبول الخلاف والتعاون", "تحالف الشرق والغرب", "نهاية الحرب"], correct: 1 },
+      { question: "أول صراع في الحرب الباردة؟", choices: ["أزمة برلين", "الحرب الكورية", "فيتنام", "كوبا"], correct: 1 },
+      { question: "أزمة برلين 1948؟", choices: ["حصار سوفياتي", "أزمة نووية", "انقلاب", "احتلال أمريكي"], correct: 0 },
+      { question: "جدار برلين هو:", choices: ["حد اقتصادي", "سياج إلكتروني", "جدار مادي يفصل الشرق عن الغرب", "خط دفاع"], correct: 2 },
+      { question: "سقوط جدار برلين؟", choices: ["1989", "1990", "1985", "1991"], correct: 0 },
+      { question: "سبب بناء جدار برلين؟", choices: ["تهريب", "منع الهجرة", "حماية من الغرب", "أسباب صحية"], correct: 1 },
+      { question: "حرب فيتنام تمثل:", choices: ["انتصار شرقي", "تحرير", "صراع بالوكالة", "حرب استعمارية"], correct: 2 },
+      { question: "ما هو سباق التسلح؟", choices: ["تنافس تقني", "تنافس عسكري", "نووي بين القوتين", "سباق فضاء"], correct: 2 },
+      { question: "نتائج الحرب الباردة؟", choices: ["فوز الشرق", "فوز الغرب", "انهيار الاتحاد السوفياتي", "حرب عالمية ثالثة"], correct: 2 }
     ];
 
     let currentQuestion = 0;
     let score = 0;
     let timer;
-    let timeLeft = 10;
+    let timeLeft = 15;
     let answered = false;
 
     function startQuiz() {
@@ -182,7 +160,7 @@
 
     function showQuestion() {
       answered = false;
-      timeLeft = 10;
+      timeLeft = 15;
       document.getElementById("timer").textContent = `الوقت: ${timeLeft}`;
       timer = setInterval(() => {
         timeLeft--;
@@ -232,10 +210,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
